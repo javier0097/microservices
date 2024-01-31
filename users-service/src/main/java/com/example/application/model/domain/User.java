@@ -3,13 +3,14 @@ package com.example.application.model.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Date;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "user_table")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
     @Id
     @Column(name = "userid")
