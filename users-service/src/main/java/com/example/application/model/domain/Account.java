@@ -1,6 +1,7 @@
 package com.example.application.model.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name = "account_table")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Account {
     @Id
     @Column(name = "accountid")
@@ -27,4 +29,9 @@ public class Account {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createddate", nullable = false, updatable = false)
     private Date createdDate;
+
+    @PrePersist
+    void onPrePersist() {
+        this.createdDate = new Date();
+    }
 }

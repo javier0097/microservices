@@ -34,4 +34,9 @@ public abstract class User {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accountid", referencedColumnName = "accountid", nullable = false)
     private Account account;
+
+    @PrePersist
+    void onPrePersist() {
+        this.createdDate = new Date();
+    }
 }

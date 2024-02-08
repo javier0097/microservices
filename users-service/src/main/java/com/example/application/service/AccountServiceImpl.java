@@ -1,8 +1,12 @@
 package com.example.application.service;
 
+import com.example.application.input.AccountInput;
 import com.example.application.model.domain.Account;
 import com.example.application.model.repositories.AccountRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -18,5 +22,27 @@ public class AccountServiceImpl implements IAccountService {
     @Override
     public void deleteById(Long id) {
         accountRepository.deleteById(id);
+    }
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public Account save(AccountInput input) {
+        Account instance = new Account();
+        instance.setAccountState(input.getAccountState());
+        instance.setAvatarId(input.getAvatarId());
+        return accountRepository.save(instance);
+    }
+    @Override
+    public Account update(Long id, AccountInput input) {
+        Account instance = accountRepository.findById(id).orElse(null);
+        if (instance != null) {
+            instance.setAvatarId(input.getAvatarId());
+            instance.setAccountState(input.getAccountState());
+            instance = accountRepository.save(instance);
+        }
+        return instance;
     }
 }
