@@ -6,10 +6,12 @@ import com.example.application.model.domain.AccountState;
 import com.example.application.model.domain.Person;
 import com.example.application.model.repositories.AccountRepository;
 import com.example.application.model.repositories.PersonRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class PersonCreateService {
     @Autowired
     private AccountRepository accountRepository;
@@ -19,7 +21,9 @@ public class PersonCreateService {
     public Person save(PersonCreateInput input) {
         Account account = composeAccount();
         account = accountRepository.save(account);
-
+        if(!input.getPassword().equals(input.getConfirmPassword())){
+            throw new UnsupportedOperationException("Password not match");
+        }
         Person person = composePerson(input, account);
 
         return personRepository.save(person);
