@@ -1,5 +1,6 @@
 package com.example.application.service;
 
+import com.example.application.exceptions.AccountNotFoundException;
 import com.example.application.input.AccountInput;
 import com.example.application.model.domain.Account;
 import com.example.application.model.repositories.AccountRepository;
@@ -17,7 +18,7 @@ public class AccountServiceImpl implements IAccountService {
     }
     @Override
     public Account findById(Long id) {
-        return accountRepository.findById(id).orElse(null);
+        return accountRepository.findById(id).orElseThrow(() -> new AccountNotFoundException("Account not found by id: " + id));
     }
     @Override
     public void deleteById(Long id) {

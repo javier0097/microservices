@@ -1,5 +1,6 @@
 package com.example.application.service;
 
+import com.example.application.exceptions.PasswordInvalidException;
 import com.example.application.input.PersonCreateInput;
 import com.example.application.model.domain.Account;
 import com.example.application.model.domain.AccountState;
@@ -22,7 +23,7 @@ public class PersonCreateService {
         Account account = composeAccount();
         account = accountRepository.save(account);
         if(!input.getPassword().equals(input.getConfirmPassword())){
-            throw new UnsupportedOperationException("Password not match");
+            throw new PasswordInvalidException("Password not match");
         }
         Person person = composePerson(input, account);
 

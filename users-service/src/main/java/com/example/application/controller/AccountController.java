@@ -3,6 +3,7 @@ package com.example.application.controller;
 import com.example.application.input.AccountInput;
 import com.example.application.model.domain.Account;
 import com.example.application.service.IAccountService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/secure/accounts")
+@Tag(name="Account controller endpoints", description = "All endpoints in Account controller")
 public class AccountController {
     @Autowired
     private IAccountService accountService;

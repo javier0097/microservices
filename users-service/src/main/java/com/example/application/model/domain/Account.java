@@ -2,6 +2,7 @@ package com.example.application.model.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name = "account_table")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Schema(description = "Account model")
 public class Account {
     @Id
     @Column(name = "accountid")
