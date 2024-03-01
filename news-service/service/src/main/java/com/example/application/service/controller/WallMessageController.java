@@ -6,6 +6,7 @@ import com.example.application.service.model.domain.Bulletin;
 import com.example.application.service.service.IBulletinService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 //@Api(
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 //@RequestScope
 public class WallMessageController {
-//    @Qualifier("bulletinServiceFeign")
+    @Qualifier("bulletinServiceFeign")
     @Autowired
     private IBulletinService service;
 
